@@ -7,21 +7,21 @@ now = time.strftime("%H:%M:%S, %d-%m-%y")
 print("It is now: ", now)
 
 while True:
-    user_input = input("Enter add, show, edit, remove or exit: ")
-    user_input = user_input.strip()
+    user_action = input("Enter add, show, edit, remove or exit: ")
+    user_action = user_action.strip()
 
-    if user_input.startswith("add"):
-        todo = user_input[4:]
+    if user_action.startswith("add"):
+        todo = user_action[4:]
 
-        todos = functions.get_todo()
+        todos = functions.get_todos()
 
         todos.append(todo.capitalize() + '\n')
 
-        functions.write_todo(todos)
+        functions.write_todos(todos)
 
-    elif user_input.startswith("show"):
+    elif user_action.startswith("show"):
 
-        todos = functions.get_todo()
+        todos = functions.get_todos()
 
         #new_todos = (item.strip('\n') for item in todos) list comprehension method
 
@@ -30,36 +30,36 @@ while True:
             row = f"{index + 1}.{item}"
             print(row)
 
-    elif user_input.startswith("edit"):
+    elif user_action.startswith("edit"):
 
         try:
-            number = int(user_input[5:])
+            number = int(user_action[5:])
             number = number - 1
 
-            todos = functions.get_todo()
+            todos = functions.get_todos()
 
             new_todo = input("Enter the new one: ")
             todos[number] = new_todo.capitalize() + '\n'
 
-            functions.write_todo(todos)
+            functions.write_todos(todos)
 
         except ValueError:
             print("Invalid command!")
             continue
 
-    elif user_input.startswith("remove"):
+    elif user_action.startswith("remove"):
 
         try:
-            number = int(user_input[7:])
+            number = int(user_action[7:])
 
-            todos = functions.get_todo()
+            todos = functions.get_todos()
 
             index = number - 1
             todo_to_be_removed = todos[index].strip('\n')
 
             todos.pop(index)
 
-            functions.write_todo(todos)
+            functions.write_todos(todos)
 
             message = f"The item *{todo_to_be_removed}* was removed from the list."
             print(message)
@@ -68,7 +68,7 @@ while True:
             print("This command does not exist!")
             continue
 
-    elif user_input.startswith("exit"):
+    elif user_action.startswith("exit"):
         break
 
     else:
