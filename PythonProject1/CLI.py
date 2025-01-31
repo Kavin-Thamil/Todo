@@ -7,7 +7,7 @@ now = time.strftime("%H:%M:%S, %d-%m-%y")
 print("It is now: ", now)
 
 while True:
-    user_action = input("Enter add, show, edit, remove or exit: ")
+    user_action = input("Enter add, show, edit, complete or exit: ")
     user_action = user_action.strip()
 
     if user_action.startswith("add"):
@@ -47,7 +47,7 @@ while True:
             print("Invalid command!")
             continue
 
-    elif user_action.startswith("remove"):
+    elif user_action.startswith("complete"):
 
         try:
             number = int(user_action[7:])
@@ -61,7 +61,7 @@ while True:
 
             functions.write_todos(todos)
 
-            message = f"The item *{todo_to_be_removed}* was removed from the list."
+            message = f"The item *{todo_to_be_removed}* is completed!."
             print(message)
 
         except IndexError:
