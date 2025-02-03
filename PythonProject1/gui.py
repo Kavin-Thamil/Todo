@@ -1,18 +1,23 @@
 import functions
 import FreeSimpleGUI as sg
 import time
+import os
+
+if not os.path.exists("todos.txt"):
+    with open("todos.txt", "w") as file:
+        pass
 
 sg.theme("Black")
 
 clock = sg.Text("", key = "clock")
 label = sg.Text("Type in a To-do: ")
 input_box = sg.InputText(tooltip="Enter To-do", key = "todo")
-add_button = sg.Button(size=2, image_source="add.png", mouseover_colors="Purple",
+add_button = sg.Button(size=2, image_source="/Users/KAVIN/PycharmProjects/PythonProject1/add.png", mouseover_colors="Purple",
                        tooltip="Add To-do", key="Add")
 list_box = sg.Listbox(values=functions.get_todos(), key="todos",
                       enable_events=True, size=(44, 10))
 edit_button = sg.Button("Edit", mouseover_colors="Purple")
-complete_button = sg.Button(size=10, image_source="complete.png", mouseover_colors="Purple",
+complete_button = sg.Button(size=10, image_source="/Users/KAVIN/PycharmProjects/PythonProject1/complete.png", mouseover_colors="Purple",
                        tooltip="Complete", key="Complete")
 exit_button = sg.Button("Exit", mouseover_colors="Purple")
 
@@ -26,7 +31,10 @@ window = sg.Window('My To-Do App',
 
 while True:
     event, values = window.read(timeout=100)
+    if event in (sg.WIN_CLOSED, "Exit"):
+        break
     window["clock"].update(value = time.strftime("%d-%b-%Y, %H:%M:%S"))
+
     match event:
         case "Add":
             todos = functions.get_todos()
