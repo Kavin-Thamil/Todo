@@ -1,6 +1,6 @@
 #from PythonProject1.module.functions import get_todo, write_todo
 
-from PythonProject1 import functions
+import functions
 import time
 
 now = time.strftime("%H:%M:%S, %d-%m-%y")
